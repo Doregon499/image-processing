@@ -1,0 +1,18 @@
+import cv2
+import numpy as np
+import cv2 as cv
+
+
+
+img = cv2.imread('C:/Users/santi/Desktop/earth.jpg')
+img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+mask_water= cv.inRange(img_hsv,(100,0,0),(150,255,100))
+water= cv.bitwise_and(img,img,mask=mask_water)
+pixel_earth= len(np.where(water>0)[0])
+pixel_water=len(np.where(water==0)[0])
+pixel= pixel_earth + pixel_water
+earth=510100000
+water_area = (earth*pixel_water)/pixel
+print("Area total del agua en kilometros es de ",water_area)
+cv2.imshow('agua',water)
+cv2.waitKey(0
